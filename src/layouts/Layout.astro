@@ -1,0 +1,65 @@
+---
+import '@fontsource/raleway/400.css';
+import '@fontsource/raleway/700.css';
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/icon' href='/logo.png' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class='md:text-xl'>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer components {
+    .heading {
+      @apply text-4xl font-bold lg:text-6xl;
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth !important;
+    font-family: 'Raleway', sans-serif;
+    background-color: #fff;
+    color: #121212;
+  }
+
+  input,
+  textarea {
+    outline: none !important;
+    appearance: none !important;
+  }
+
+  .main-gradient {
+    background: linear-gradient(
+      98.54deg,
+      #ee8e8e 3.01%,
+      rgba(169, 125, 221, 0.766146) 25.69%,
+      rgba(243, 215, 115, 0.443331) 57%,
+      rgba(150, 227, 190, 0.212763) 79.36%,
+      rgba(102, 179, 234, 0.38) 100%
+    );
+  }
+</style>

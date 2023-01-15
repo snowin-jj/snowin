@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon';
+---
+
+<div
+  id='menu'
+  class='z-[999] fixed -top-[100%] opacity-0 left-0 w-full min-h-screen bg-white lg:hidden grid place-items-center transition-all duration-300 ease-in-out'
+>
+  <div
+    class='absolute top-0 left-0 w-full h-20 px-6 flex justify-between items-center'
+  >
+    <h1 class='font-bold text-2xl'>Snowin</h1>
+    <button id='btnClose'>
+      <Icon name='radix-icons:cross-1' class='w-6' />
+    </button>
+  </div>
+  <nav class='flex flex-col justify-center items-center gap-4'>
+    <a href='#home' class='text-xl' id='mobileLink'>Home</a>
+    <a href='#stories' class='text-xl' id='mobileLink'>Stories</a>
+    <a href='#chat' class='text-xl' id='mobileLink'>Contact</a>
+    <a href='#projects' class='text-xl' id='mobileLink'>Portofolio</a>
+  </nav>
+</div>
+
+<script>
+  const btnClose = document.querySelector('#btnClose');
+  const menu = document.querySelector('#menu');
+
+  function closeMenu() {
+    menu.classList.add('-top-[100%]');
+    menu.classList.add('opacity-0');
+    menu.classList.remove('top-0');
+    menu.classList.remove('opacity-1');
+  }
+
+  btnClose.addEventListener('click', closeMenu);
+
+  const links = document.querySelectorAll('#mobileLink');
+
+  links.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>

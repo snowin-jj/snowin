@@ -1,0 +1,94 @@
+---
+import { Icon } from 'astro-icon';
+import Menubar from '../components/Menubar.astro';
+---
+
+<header
+  class='z-10 fixed top-0 left-0 w-full flex justify-between items-center h-20 px-6 bg-transparent lg:px-36 lg:h-24'
+>
+  <div class='hidden lg:flex items-center gap-10'>
+    <a
+      href='#home'
+      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
+      >Home</a
+    >
+    <a
+      href='#stories'
+      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
+      >Stories</a
+    >
+  </div>
+
+  <h1 class='font-bold text-2xl lg:text-4xl'>
+    <a href='#home'>Snowin</a>
+  </h1>
+  <button id='btnOpen' class='lg:hidden'>
+    <Icon name='radix-icons:hamburger-menu' class='w-6' />
+  </button>
+
+  <div class='hidden lg:flex items-center gap-10'>
+    <a
+      href='#projects'
+      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
+      >Portofolio</a
+    >
+    <a
+      href='#chat'
+      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
+      >Contact</a
+    >
+  </div>
+</header>
+<Menubar />
+
+<style>
+  .scroll-down {
+    transition: all 0.3s ease-in-out;
+    transform: translate3d(0, -100%, 0);
+  }
+  .scroll-up {
+    transition: all 0.3s ease-in-out;
+    background-color: #00000002;
+    backdrop-filter: blur(60px);
+    background-clip: padding-box;
+  }
+</style>
+
+<script>
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) header.classList.remove('scroll-up');
+
+    if (
+      currentScroll > lastScroll &&
+      !header.classList.contains('scroll-down')
+    ) {
+      header.classList.remove('scroll-up');
+      header.classList.add('scroll-down');
+    }
+
+    if (
+      currentScroll < lastScroll &&
+      header.classList.contains('scroll-down')
+    ) {
+      header.classList.add('scroll-up');
+      header.classList.remove('scroll-down');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  const btnOpen = document.querySelector('#btnOpen');
+  const menu = document.querySelector('#menu');
+
+  btnOpen.addEventListener('click', () => {
+    menu.classList.remove('-top-[100%]');
+    menu.classList.remove('opacity-0');
+    menu.classList.add('top-0');
+    menu.classList.add('opacity-1');
+  });
+</script>

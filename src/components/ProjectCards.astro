@@ -1,0 +1,76 @@
+---
+import { Icon } from 'astro-icon';
+
+export const projects = [
+  {
+    icon: 'bi:triangle-fill',
+    title: 'Galeria',
+    subTitle: 'Image Gallery App',
+    body: 'An image gallery app where you can discover amazing images. Made with React and styled with tailwindcss.',
+    href: 'https://zipy.vercel.app/api/snowin/galeria',
+    color: '#121212',
+    image: ['./projects/galeria-desk.png', './projects/galeria-sm.png'],
+  },
+  {
+    icon: 'mdi:square-rounded',
+    title: 'DevMailer',
+    subTitle: 'API Build for Developers',
+    body: 'Dev Mailer is an API service designed to assist developers. It incorporates a mail service into your website.',
+    href: 'https://zipy.vercel.app/api/snowin/devmailer',
+    color: '#FFF95D',
+    image: ['./projects/devmailer-desk.png'],
+  },
+  {
+    icon: 'mdi:circle',
+    title: 'Zipy',
+    subTitle: 'Link Management Tool',
+    body: 'Zipy is a link management app that lets you manage all of your social media links in one place.',
+    href: 'https://zipy.vercel.app/api/snowin/zipy',
+    color: '#AA85F8',
+    image: ['./projects/zipy-desk.png', './projects/zipy-sm.png'],
+  },
+];
+---
+
+<div class='w-full flex flex-col items-center gap-6'>
+  {
+    projects.map((project, i) => (
+      <>
+        <hr class='border-primaryDark my-12 w-full' />
+        <div class='w-full flex flex-col items-start text-xl md:text-2xl md:flex-row md:justify-between'>
+          <div class='flex items-start gap-4'>
+            <Icon
+              name={project.icon}
+              class={`w-14 md:w-24`}
+              color={project.color}
+            />
+            <span class='flex flex-col items-start gap-1 lg:gap-3'>
+              <h1 class='heading lg:text-5xl'>{project.title}</h1>
+              <p class='text-lg pl-2'>{project.subTitle}</p>
+            </span>
+          </div>
+
+          <div class='h-full flex flex-col items-start gap-4 my-4 md:my-0 md:w-[44%]'>
+            <p class='text-lg lg:text-xl'>{project.body}</p>
+            <span class='flex items-center gap-2 text-lg lg:text-xl font-semibold'>
+              <a href={project.href} target='_blank'>
+                View Project
+              </a>
+              <Icon name='bi:arrow-right' class='w-6 md:w-5' />
+            </span>
+          </div>
+        </div>
+        <div id='image-container' class='relative max-w-[70rem] xl:w-[80rem]'>
+          <img src={project.image[0]} alt={project.subTitle} />
+          {i % 2 === 0 && (
+            <img
+              src={project.image[1]}
+              alt={project.subTitle}
+              class='hidden xl:block w-64 object-cover absolute bottom-16 right-0'
+            />
+          )}
+        </div>
+      </>
+    ))
+  }
+</div>
