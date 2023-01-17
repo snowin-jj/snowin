@@ -3,9 +3,7 @@ import { Icon } from 'astro-icon';
 import Menubar from './Menubar.astro';
 ---
 
-<header
-  class='z-10 fixed top-0 left-0 w-full px-8 py-6 lg:px-32 lg:py-14 transition-all duration-500 ease-in-out'
->
+<header class='z-10 fixed top-0 left-0 w-full px-8 py-6 lg:px-32 lg:py-14'>
   <nav
     class='relative z-20 h-full flex justify-between items-center text-[#12121280]'
   >
@@ -40,12 +38,14 @@ import Menubar from './Menubar.astro';
 
 <style>
   .scroll-down {
-    /* padding-block: 3.5rem; */
+    transition: all 0.3s ease-in-out;
     transform: translate3d(0, -100%, 0);
   }
   .scroll-up {
-    background-color: #00000002;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
     backdrop-filter: blur(60px);
+    background-color: #00000002;
     background-clip: padding-box;
     padding-block: 2rem !important;
   }
