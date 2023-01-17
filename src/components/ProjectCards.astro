@@ -46,12 +46,12 @@ export const projects = [
             />
             <span class='flex flex-col items-start gap-1 lg:gap-3'>
               <h1 class='heading lg:text-5xl'>{project.title}</h1>
-              <p class='text-lg pl-2'>{project.subTitle}</p>
+              <p class='text-lg pl-1'>{project.subTitle}</p>
             </span>
           </div>
 
           <div class='h-full flex flex-col items-start gap-4 my-4 md:my-0 md:w-[44%]'>
-            <p class='text-lg lg:text-xl'>{project.body}</p>
+            <p class='text-lg text-[#12121280] lg:text-xl'>{project.body}</p>
             <span class='flex items-center gap-2 text-lg lg:text-xl font-semibold'>
               <a href={project.href} target='_blank'>
                 View Project
@@ -60,7 +60,10 @@ export const projects = [
             </span>
           </div>
         </div>
-        <div id='image-container' class='relative max-w-[70rem] xl:w-[80rem]'>
+        <div
+          id='image-container'
+          class='relative max-w-[70rem] xl:w-[80rem] -z-10'
+        >
           <img src={project.image[0]} alt={project.subTitle} />
           {i % 2 === 0 && (
             <img

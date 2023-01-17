@@ -1,8 +1,9 @@
 ---
-import ContactForm from '../components/ContactForm.astro';
-import ProjectCards from '../components/ProjectCards.astro';
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../layouts/Navbar.astro';
+import About from '../layouts/About.astro';
+import ProjectCards from '../components/ProjectCards.astro';
+import Hero from '../layouts/Hero.astro';
+import ContactForm from '../layouts/ContactForm.astro';
 ---
 
 <Layout title='Snowin | Personal Site'>
@@ -10,86 +11,18 @@ import Navbar from '../layouts/Navbar.astro';
     id='home'
     class='main-gradient h-[48vh] lg:min-h-screen grid place-items-center'
   >
-    <Navbar />
-    <div
-      class='w-[18rem] md:w-full mx-auto text-center flex flex-col justify-center items-center gap-4 my-32'
-    >
-      <h1 class='heading lg:text-8xl'>Hi there !!</h1>
-      <p class='text-lg md:w-[22rem] lg:text-2xl'>
-        I'm Snowin fullstack developer based in India.
-      </p>
-    </div>
+    <Hero />
   </section>
 
   <section class='my-16 px-8 lg:px-36 lg:my-24' id='stories'>
-    <h1 class='heading'>#Stories</h1>
-    <p class='my-4 text-xl md:text-2xl lg:my-8'>
-      Yes, as previously stated, I am a full-stack developer. I create software
-      for small businesses and startups.
-      <br />
-      <br />
-      Aside from that, I am an introvert. I enjoy working in groups, but I haven't
-      had the chance to do so.
-    </p>
+    <About />
   </section>
 
   <section id='projects' class='flex flex-col items-center my-16 px-8 lg:px-36'>
     <ProjectCards />
   </section>
 
-  <section id='chat' class='flex flex-col items-center gap-10 px-8 lg:px-36'>
-    <h1 class='heading'>Say Hi !!</h1>
+  <section id='contact' class='flex flex-col items-center gap-10 px-8 lg:px-36'>
     <ContactForm />
-    <hr class='border-primaryDark w-full mt-24' />
   </section>
-
-  <footer class='flex flex-col items-start gap-4 px-8 py-16 lg:px-36'>
-    <h1 class='heading'>Links</h1>
-    <div class='flex items-center gap-4'>
-      <a
-        href='https://zipy.vercel.app/api/snowin/twitter'
-        target='_blank'
-        class='footer-link'>Twitter</a
-      >
-      <a
-        href='https://zipy.vercel.app/api/snowin/instagram'
-        target='_blank'
-        class='footer-link'>Instagram</a
-      >
-      <a
-        href='https://zipy.vercel.app/api/snowin/linkedin'
-        target='_blank'
-        class='footer-link'>Linkedin</a
-      >
-      <a
-        href='https://zipy.vercel.app/api/snowin/github'
-        target='_blank'
-        class='footer-link'>Github</a
-      >
-    </div>
-  </footer>
 </Layout>
-
-<style>
-  .footer-link {
-    position: relative;
-  }
-
-  .footer-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #121212;
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-  }
-
-  .footer-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-</style>

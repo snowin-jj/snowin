@@ -1,0 +1,49 @@
+<footer class='flex flex-col items-start gap-4 px-8 py-16 lg:px-36'>
+  <h1 class='heading'>Links</h1>
+  <div class='flex items-center gap-4'>
+    <a
+      href='https://zipy.vercel.app/api/snowin/twitter'
+      target='_blank'
+      class='footer-link'>Twitter</a
+    >
+    <a
+      href='https://zipy.vercel.app/api/snowin/instagram'
+      target='_blank'
+      class='footer-link'>Instagram</a
+    >
+    <a
+      href='https://zipy.vercel.app/api/snowin/linkedin'
+      target='_blank'
+      class='footer-link'>Linkedin</a
+    >
+    <a
+      href='https://zipy.vercel.app/api/snowin/github'
+      target='_blank'
+      class='footer-link'>Github</a
+    >
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    position: relative;
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #121212;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
+
+  .footer-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+</style>

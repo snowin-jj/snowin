@@ -1,53 +1,51 @@
 ---
 import { Icon } from 'astro-icon';
-import Menubar from '../components/Menubar.astro';
+import Menubar from './Menubar.astro';
 ---
 
 <header
-  class='lg:z-[999] fixed top-0 left-0 w-full flex justify-between items-center h-20 px-6 bg-transparent lg:px-36 lg:h-24'
+  class='z-10 fixed top-0 left-0 w-full transition-all duration-500 ease-in-out'
 >
-  <div class='hidden lg:flex items-center gap-10'>
-    <a
-      href='#home'
-      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
-      >Home</a
-    >
-    <a
-      href='#stories'
-      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
-      >Stories</a
-    >
-  </div>
+  <nav
+    class='h-full px-8 p-8 lg:px-32 flex justify-between items-center text-[#12121280]'
+  >
+    <!-- primary nav -->
+    <div class='hidden lg:flex items-center gap-8'>
+      <a href='#home' class='hover:text-primaryDark'>Home</a>
+      <a href='#stories' class='hover:text-primaryDark'>Stories</a>
+    </div>
 
-  <h1 class='font-bold text-2xl lg:text-4xl'>
-    <a href='#home'>Snowin</a>
-  </h1>
-  <button id='btnOpen' class='lg:hidden'>
-    <Icon name='radix-icons:hamburger-menu' class='w-6' />
-  </button>
+    <!-- logo -->
+    <h1 class='text-2xl text-primaryDark font-bold'>
+      <a href='#home'>Snowin</a>
+    </h1>
 
-  <div class='hidden lg:flex items-center gap-10'>
-    <a
-      href='#projects'
-      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
-      >Portofolio</a
-    >
-    <a
-      href='#chat'
-      class='transition-all duration-300 ease-in-out hover:underline underline-offset-4'
-      >Contact</a
-    >
-  </div>
+    <!-- secondary nav -->
+    <div class='hidden lg:flex items-center gap-8'>
+      <a href='#projects' class='hover:text-primaryDark'>Portofolio</a>
+      <a href='#contact' class='hover:text-primaryDark'>Contact</a>
+    </div>
+
+    <!-- mobile nav button -->
+    <button id='btnOpen' class='lg:hidden'>
+      <Icon name='radix-icons:hamburger-menu' class='w-6' />
+    </button>
+    <button id='btnClose' class='hidden lg:hidden'>
+      <Icon name='radix-icons:cross-1' class='w-6' />
+    </button>
+  </nav>
+
+  <!-- mobile menu -->
+  <Menubar />
 </header>
-<Menubar />
 
 <style>
   .scroll-down {
-    transition: all 0.3s ease-in-out;
+    /* transition: all 0.3s ease-in-out; */
     transform: translate3d(0, -100%, 0);
   }
   .scroll-up {
-    transition: all 0.3s ease-in-out;
+    /* transition: all 0.3s ease-in-out; */
     background-color: #00000002;
     backdrop-filter: blur(60px);
     background-clip: padding-box;
@@ -56,13 +54,40 @@ import Menubar from '../components/Menubar.astro';
 
 <script>
   const header = document.querySelector('header');
+  const mobileMenu = document.querySelector('#mobileMenu');
+  const links = document.querySelectorAll('#mobileLink');
+  const btnOpen = document.querySelector('#btnOpen');
+  const btnClose = document.querySelector('#btnClose');
+
+  const toggleMenu = () => {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    btnClose.classList.toggle('hidden');
+    btnOpen.classList.toggle('hidden');
+  };
+
+  const closeMenu = () => {
+    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.remove('flex');
+    btnClose.classList.add('hidden');
+    btnOpen.classList.remove('hidden');
+  };
+
+  btnOpen.addEventListener('click', () => {
+    header.classList.add('scroll-up');
+    toggleMenu();
+  });
+  btnClose.addEventListener('click', toggleMenu);
+
+  links.forEach((link) => {
+    link.addEventListener('click', toggleMenu);
+  });
+
   let lastScroll = 0;
-
   window.addEventListener('scroll', () => {
+    closeMenu();
     const currentScroll = window.pageYOffset;
-
     if (currentScroll <= 0) header.classList.remove('scroll-up');
-
     if (
       currentScroll > lastScroll &&
       !header.classList.contains('scroll-down')
@@ -70,7 +95,6 @@ import Menubar from '../components/Menubar.astro';
       header.classList.remove('scroll-up');
       header.classList.add('scroll-down');
     }
-
     if (
       currentScroll < lastScroll &&
       header.classList.contains('scroll-down')
@@ -78,17 +102,6 @@ import Menubar from '../components/Menubar.astro';
       header.classList.add('scroll-up');
       header.classList.remove('scroll-down');
     }
-
     lastScroll = currentScroll;
-  });
-
-  const btnOpen = document.querySelector('#btnOpen');
-  const menu = document.querySelector('#menu');
-
-  btnOpen.addEventListener('click', () => {
-    menu.classList.remove('-top-[100%]');
-    menu.classList.remove('opacity-0');
-    menu.classList.add('top-0');
-    menu.classList.add('opacity-1');
   });
 </script>
