@@ -1,5 +1,6 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
 export const projects = [
   {
@@ -9,7 +10,10 @@ export const projects = [
     body: 'An image gallery app where you can discover amazing images. Made with React and styled with tailwindcss.',
     href: 'https://zipy.vercel.app/api/snowin/galeria',
     color: '#121212',
-    image: ['./projects/galeria-desk.png', './projects/galeria-sm.png'],
+    image: [
+      import('../assets/images/projects/galeria-desk.png'),
+      import('../assets/images/projects/galeria-sm.png'),
+    ],
   },
   {
     icon: 'mdi:square-rounded',
@@ -18,7 +22,7 @@ export const projects = [
     body: 'Dev Mailer is an API service designed to assist developers. It incorporates a mail service into your website.',
     href: 'https://zipy.vercel.app/api/snowin/devmailer',
     color: '#FFF95D',
-    image: ['./projects/devmailer-desk.png'],
+    image: [import('../assets/images/projects/devmailer-desk.png')],
   },
   {
     icon: 'mdi:circle',
@@ -27,7 +31,10 @@ export const projects = [
     body: 'Zipy is a link management app that lets you manage all of your social media links in one place.',
     href: 'https://zipy.vercel.app',
     color: '#AA85F8',
-    image: ['./projects/zipy-desk.png', './projects/zipy-sm.png'],
+    image: [
+      import('../assets/images/projects/zipy-desk.png'),
+      import('../assets/images/projects/zipy-sm.png'),
+    ],
   },
 ];
 ---
@@ -41,7 +48,7 @@ export const projects = [
           <div class='flex items-start gap-4'>
             <Icon
               name={project.icon}
-              class={`w-14 md:w-24`}
+              class={`text-6xl md:text-8xl`}
               color={project.color}
             />
             <span class='flex flex-col items-start gap-1 lg:gap-3'>
@@ -64,9 +71,9 @@ export const projects = [
           id='image-container'
           class='relative max-w-[70rem] xl:w-[80rem] -z-10'
         >
-          <img src={project.image[0]} alt={project.subTitle} />
+          <Image src={project.image[0]} alt={project.subTitle} />
           {i % 2 === 0 && (
-            <img
+            <Image
               src={project.image[1]}
               alt={project.subTitle}
               class='hidden xl:block w-64 object-cover absolute bottom-16 right-0'

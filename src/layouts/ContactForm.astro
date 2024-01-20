@@ -28,21 +28,29 @@ import FormInput from '../components/FormInput.astro';
 
 <script>
   import { sendMail } from '../api';
-
   const form = document.querySelector('#contactForm');
-  const name: HTMLInputElement = document.querySelector('#name');
-  const email: HTMLInputElement = document.querySelector('#email');
-  const message: HTMLInputElement = document.querySelector('#message');
   const submitBtn: HTMLButtonElement = document.querySelector('#submit');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
     submitBtn.textContent = 'Sending...';
-    await sendMail(name.value, email.value, message.value);
-    submitBtn.innerHTML = 'Send';
-    name.value = '';
-    email.value = '';
-    message.value = '';
+
+    try {
+      await sendMail(
+        String(data.name),
+        String(data.email),
+        String(data.message),
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      submitBtn.innerHTML = 'Send';
+      form.reset();
+    }
   });
 </script>

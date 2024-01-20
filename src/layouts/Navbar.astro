@@ -1,9 +1,12 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 import Menubar from './Menubar.astro';
 ---
 
-<header class='z-10 fixed top-0 left-0 w-full px-8 py-6 lg:px-32 lg:py-14'>
+<header
+  id='primary-header'
+  class='z-10 fixed top-0 left-0 w-full px-8 py-6 lg:px-32 lg:py-14'
+>
   <nav
     class='relative z-20 h-full flex justify-between items-center text-[#12121280]'
   >
@@ -26,10 +29,14 @@ import Menubar from './Menubar.astro';
 
     <!-- mobile nav button -->
     <button id='btnOpen' class='lg:hidden'>
-      <Icon name='radix-icons:hamburger-menu' class='w-6' color='#121212' />
+      <Icon
+        name='radix-icons:hamburger-menu'
+        class='text-2xl'
+        color='#121212'
+      />
     </button>
     <button id='btnClose' class='hidden lg:hidden'>
-      <Icon name='radix-icons:cross-1' class='w-6' color='#121212' />
+      <Icon name='radix-icons:cross-1' class='text-2xl' color='#121212' />
     </button>
   </nav>
   <!-- mobile menu -->
@@ -42,7 +49,7 @@ import Menubar from './Menubar.astro';
     transform: translate3d(0, -100%, 0);
   }
   .scroll-up {
-    -webkit-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     backdrop-filter: blur(60px);
     background-color: #00000002;
@@ -52,7 +59,7 @@ import Menubar from './Menubar.astro';
 </style>
 
 <script>
-  const header = document.querySelector('header');
+  const header: HTMLHeadElement = document.querySelector('#primary-header');
   const mobileMenu = document.querySelector('#mobileMenu');
   const links = document.querySelectorAll('#mobileLink');
   const btnOpen = document.querySelector('#btnOpen');
@@ -85,7 +92,7 @@ import Menubar from './Menubar.astro';
   let lastScroll = 0;
   window.addEventListener('scroll', () => {
     closeMenu();
-    const currentScroll = window.pageYOffset;
+    const currentScroll = window.scrollY;
     if (currentScroll <= 0) header.classList.remove('scroll-up');
     if (
       currentScroll > lastScroll &&
@@ -103,4 +110,10 @@ import Menubar from './Menubar.astro';
     }
     lastScroll = currentScroll;
   });
+
+  // const navigationHeight = header.offsetHeight;
+  // document.documentElement.style.setProperty(
+  //   '--scroll-padding',
+  //   navigationHeight + 'px',
+  // );
 </script>

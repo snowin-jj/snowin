@@ -1,4 +1,4 @@
-import { APIRoute } from 'astro';
+import type { APIRoute } from 'astro';
 
 interface FormDataType {
   name: string;
@@ -6,7 +6,7 @@ interface FormDataType {
   message: string;
 }
 
-export const post: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request }) => {
   const body: FormDataType = await request.json();
   const API_KEY = import.meta.env.DEVMAILER_API_KEY;
 
@@ -23,14 +23,20 @@ export const post: APIRoute = async ({ request }) => {
         subject: 'From your website',
         body: `${body.email}: ${body.message}`,
       }),
-    }
+    },
   );
-
   const jsonData = await res.json();
 
-  return {
-    body: JSON.stringify({
+  if (!res.ok) {
+    return new Response(JSON.stringify({ error: jsonData }), {
+      status: res.status || 500,
+    });
+  }
+
+  return new Response(
+    JSON.stringify({
       data: jsonData.message,
     }),
-  };
+    { status: res.status || 200 },
+  );
 };

@@ -11,7 +11,7 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -59,6 +59,32 @@ const { title } = Astro.props;
   @tailwind components;
   @tailwind utilities;
 
+  @layer base {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth !important;
+      scroll-padding: var(--scroll-padding, 6rem);
+      font-family: 'Raleway', sans-serif;
+      background-color: #fff;
+      color: #121212;
+    }
+
+    input,
+    textarea {
+      outline: none !important;
+      appearance: none !important;
+    }
+
+    a {
+      transition: color 0.3s ease-in-out;
+    }
+  }
+
   @layer components {
     .heading {
       @apply text-4xl font-bold lg:text-6xl;
@@ -82,24 +108,5 @@ const { title } = Astro.props;
       background-clip: padding-box;
       box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
     }
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth !important;
-    font-family: 'Raleway', sans-serif;
-    background-color: #fff;
-    color: #121212;
-  }
-
-  input,
-  textarea {
-    outline: none !important;
-    appearance: none !important;
   }
 </style>

@@ -1,16 +1,18 @@
 import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
 import tailwind from '@astrojs/tailwind';
+import netlify from '@astrojs/netlify';
+import icon from 'astro-icon';
 
-// https://astro.build/config
-
-// https://astro.build/config
-import netlify from "@astrojs/netlify/functions";
-
-// https://astro.build/config
-export default defineConfig({
+/** @type {import('astro').AstroConfig} */
+const astroConfig = {
+  integrations: [tailwind(), icon()],
   output: 'server',
-  integrations: [tailwind()],
-  adapter: netlify()
-});
+  adapter: netlify(),
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/noop',
+    },
+  },
+};
+
+export default defineConfig(astroConfig);
